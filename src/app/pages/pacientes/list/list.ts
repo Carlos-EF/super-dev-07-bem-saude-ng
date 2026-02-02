@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { RegistroStatusTag } from '../../../core/components/registro-status-tag/registro-status-tag';
@@ -25,7 +25,8 @@ import { TextareaModule } from "primeng/textarea";
     InputTextModule, 
     InputMaskModule, 
     DatePickerModule, 
-    TextareaModule
+    TextareaModule,
+    ReactiveFormsModule
   ],
   templateUrl: './list.html',
 })
@@ -37,6 +38,21 @@ export class List {
   pesquisa: string = "";
 
   visible: boolean = false;
+
+  private readonly formBuilder = inject(FormBuilder);
+
+  pacienteForm = this.formBuilder.group({
+    nome: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+    telefone: ["", [Validators.maxLength(15)]],
+    cpf: ["", [Validators.required, Validators.maxLength(15)]],
+    dataNascimento: ["", [Validators.required]],
+    email: [null, [Validators.email, Validators.maxLength(60)]],
+    endereco: [null, [Validators.maxLength(45)]],
+    observacoes: [null],
+    tipoSanguineo: ["O+", [Validators.required]]
+  });
+
+  tipoSanguineoOpcoes: string[] = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
   pacientes: PacienteResponseModel[] = [
     {
@@ -111,7 +127,6 @@ export class List {
     }
   ];
   
-
   showDialog(): void {
     this.visible = true;
   }
