@@ -1,0 +1,53 @@
+<div class="space-y-6">
+
+    <div class="flex justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">Consultas</h1>
+            <p class="text-gray-900">Gerenciamento de consultas</p>
+        </div>
+
+        <p-button label="Nova Consulta" icon="fa fa-plus" (onClick)="showDialog()"></p-button>
+    </div>
+
+    <div class="bg-white rouded-xl shadow-sm p-4">
+        <div class="flex flex-row gap-4">
+            <p-datepicker [showIcon]="true" pInputMask="99/99/9999" dateFormat="dd/mm/aaaa" placeholder="dd/mm/aaaa"
+                [iconDisplay]="'input'" />
+
+            <p-select [options]="profissionais" [(ngModel)]="profissionalSelecionado" />
+
+            <p-select [options]="status" [(ngModel)]="statusSelecionado" />
+        </div>
+    </div>
+
+    <p-table [value]="consultas" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 20]">
+    <ng-template #header>
+        <tr>
+            <th>Horário</th>
+            <th>Paciente</th>
+            <th>Profissional</th>
+            <th>Status</th>
+            <th>
+                <div class="text-right">Ações</div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-consulta>
+        <tr>
+            <td>{{ consulta.horarioPrevisto }}</td>
+            <td>{{ consulta.paciente }}</td>
+            <td>{{ consulta.profissional }}</td>
+            <td>
+                
+            </td>
+            <td>
+                <div class="flex gap-1 justify-end">
+                    <p-button icon="fa-regular fa-pen-to-square" variant="text" severity="info" />
+                    <p-button icon="fa fa-trash" variant="text" severity="danger" />
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>

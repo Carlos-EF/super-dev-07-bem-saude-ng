@@ -1,0 +1,13 @@
+<!-- "Confirmada", "Agendada", "Cancelada", "Em Atendimento", "Finalizada" -->
+
+@if (status() == "Confirmada"){
+<p-tag value="Confirmada" [rounded]="true" severity="success" />
+} @else if (status() == "Agendada") {
+<p-tag value="Agendada" [rounded]="true" severity="danger" />
+}
+@else if (status() == "Cancelada") {
+<p-tag value="Cancelada" [rounded]="true" severity="warn" />
+}
+@else if (status() == "Em Atendimento") {
+<p-tag value="Em Atendimento" [rounded]="true" severity="info" />
+}
