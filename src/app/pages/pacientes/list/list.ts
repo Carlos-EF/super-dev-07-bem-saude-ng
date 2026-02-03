@@ -43,8 +43,8 @@ export class List {
 
   pacienteForm = this.formBuilder.group({
     nome: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-    telefone: ["", [Validators.maxLength(15)]],
-    cpf: ["", [Validators.required, Validators.maxLength(15)]],
+    telefone: ["", [Validators.required, Validators.maxLength(15)]],
+    cpf: ["", [Validators.required, Validators.maxLength(14)]],
     dataNascimento: ["", [Validators.required]],
     email: [null, [Validators.email, Validators.maxLength(60)]],
     endereco: [null, [Validators.maxLength(45)]],
@@ -129,5 +129,14 @@ export class List {
   
   showDialog(): void {
     this.visible = true;
+  }
+
+  cancelar() {
+    this.visible = false;
+    this.pacienteForm.reset();
+  }
+
+  salvar() {
+
   }
 }
