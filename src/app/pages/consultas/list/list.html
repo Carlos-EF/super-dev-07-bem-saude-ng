@@ -41,7 +41,15 @@
                         <p class="text-gray-500">{{ consulta.data}}</p>
                     </div>
                 </td>
-                <td>{{ consulta.paciente }}</td>
+                <td>
+                    <div class="flex items-center gap-2">
+                        <p-avatar 
+                        shape="circle" 
+                        [style]="{'background-color': 'var(--p-tag-info-background)', 'color': 'var(--p-tag-info-color)'}"
+                        [label]='pegarPrimeiraLetraPaciente(consulta.paciente)' />
+                        <p>{{ consulta.paciente }}</p>
+                    </div>
+                </td>
                 <td>{{ consulta.profissional }}</td>
                 <td>
                     <app-registro-status-consulta [status]="consulta.status" />

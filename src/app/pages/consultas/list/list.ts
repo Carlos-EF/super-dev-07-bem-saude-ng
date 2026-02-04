@@ -10,6 +10,7 @@ import { ConsultaResponseModel } from '../../../models/consulta.model';
 import { RegistroStatusConsulta } from "../../../core/components/registro-status-consulta/registro-status-consulta";
 import { AcoesBotaoConsultas } from "../../../core/components/acoes-botao-consultas/acoes-botao-consultas";
 import { TextareaModule } from 'primeng/textarea';
+import { AvatarModule } from 'primeng/avatar';
 
 @Component({
   selector: 'app-list',
@@ -24,7 +25,9 @@ import { TextareaModule } from 'primeng/textarea';
     RegistroStatusConsulta,
     AcoesBotaoConsultas,
     ReactiveFormsModule,
-    TextareaModule],
+    TextareaModule,
+    AvatarModule,
+  ],
   templateUrl: './list.html',
 })
 export class List {
@@ -38,6 +41,8 @@ export class List {
     observacoes: [null],
   }
   );
+
+  primeiraLetra: string = "";
 
   profissionalOpcoes = ["Selecione"];
 
@@ -147,6 +152,12 @@ export class List {
   cancelar() {
     this.visible = false;
     this.consultaForm.reset();
+  }
+
+  pegarPrimeiraLetraPaciente(paciente: string) {
+    this.primeiraLetra = paciente.substring(0,1);
+
+    return this.primeiraLetra;
   }
 
   salvar() {
