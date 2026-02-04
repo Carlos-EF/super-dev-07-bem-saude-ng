@@ -1,13 +1,16 @@
-<!-- "Confirmada", "Agendada", "Cancelada", "Em Atendimento", "Finalizada" -->
+<!-- "Confirmada", "Agendada", "Cancelada", "Em Andamento", "Finalizada" -->
 
 @if (status() == "Confirmada"){
 <p-tag value="Confirmada" [rounded]="true" severity="success" />
 } @else if (status() == "Agendada") {
-<p-tag value="Agendada" [rounded]="true" severity="danger" />
+<p-tag value="Agendada" [rounded]="true" severity="warn" />
 }
 @else if (status() == "Cancelada") {
-<p-tag value="Cancelada" [rounded]="true" severity="warn" />
+<p-tag value="Cancelada" [rounded]="true" severity="danger" />
 }
-@else if (status() == "Em Atendimento") {
-<p-tag value="Em Atendimento" [rounded]="true" severity="info" />
+@else if (status() == "Em Andamento") {
+<p-tag value="Em Andamento" [rounded]="true" severity="info" />
+}
+@else if (status() == "Finalizada") {
+<p-tag value="Finalizada" [rounded]="true" severity="contrast" />
 }

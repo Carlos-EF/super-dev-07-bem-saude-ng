@@ -7,10 +7,12 @@ import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { InputMaskDirective } from "primeng/inputmask";
 import { ConsultaResponseModel } from '../../../models/consulta.model';
+import { RegistroStatusConsulta } from "../../../core/components/registro-status-consulta/registro-status-consulta";
+import { AcoesBotaoConsultas } from "../../../core/components/acoes-botao-consultas/acoes-botao-consultas";
 
 @Component({
   selector: 'app-list',
-  imports: [ButtonModule, FormsModule, SelectModule, DatePickerModule, TableModule, DialogModule, InputMaskDirective],
+  imports: [ButtonModule, FormsModule, SelectModule, DatePickerModule, TableModule, DialogModule, InputMaskDirective, RegistroStatusConsulta, AcoesBotaoConsultas],
   templateUrl: './list.html',
 })
 export class List {
@@ -39,7 +41,7 @@ export class List {
     {
       paciente: 'Fernanda Costa',
       profissional: 'Dra. Juliana Martins',
-      status: 'Atrasada',
+      status: 'Cancelada',
       data: '2026-02-03',
       horarioPrevisto: '09:00'
     },
@@ -95,7 +97,7 @@ export class List {
     {
       paciente: 'Bruna Carvalho',
       profissional: 'Dra. Juliana Martins',
-      status: 'Atrasada',
+      status: 'Cancelada',
       data: '2026-02-05',
       horarioPrevisto: '10:30'
     },
@@ -108,7 +110,7 @@ export class List {
     }
   ];
 
-  status = ["Todos os status", "Confirmada", "Agendada", "Cancelada", "Em Atendimento", "Finalizada"];
+  status = ["Todos os status", "Confirmada", "Agendada", "Cancelada", "Em Andamento", "Finalizada"];
 
   statusSelecionado: string = "Todos os status";
 
