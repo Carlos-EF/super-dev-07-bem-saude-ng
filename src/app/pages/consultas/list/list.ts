@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DialogModule } from 'primeng/dialog';
@@ -9,13 +9,39 @@ import { InputMaskDirective } from "primeng/inputmask";
 import { ConsultaResponseModel } from '../../../models/consulta.model';
 import { RegistroStatusConsulta } from "../../../core/components/registro-status-consulta/registro-status-consulta";
 import { AcoesBotaoConsultas } from "../../../core/components/acoes-botao-consultas/acoes-botao-consultas";
+import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'app-list',
-  imports: [ButtonModule, FormsModule, SelectModule, DatePickerModule, TableModule, DialogModule, InputMaskDirective, RegistroStatusConsulta, AcoesBotaoConsultas],
+  imports: [
+    ButtonModule,
+    FormsModule,
+    SelectModule,
+    DatePickerModule,
+    TableModule,
+    DialogModule,
+    InputMaskDirective,
+    RegistroStatusConsulta,
+    AcoesBotaoConsultas,
+    ReactiveFormsModule,
+    TextareaModule],
   templateUrl: './list.html',
 })
 export class List {
+  private readonly formBuilder = inject(FormBuilder);
+
+  consultaForm = this.formBuilder.group({
+    paciente: ["Selecione", [Validators.required]],
+    profissional: ["Selecione", [Validators.required]],
+    data: ["", [Validators.required]],
+    horarioPrevisto: ["", [Validators.required]],
+    observacoes: [null],
+  }
+  );
+
+  profissionalOpcoes = ["Selecione"];
+
+  pacienteOpcoes = ["Selecione"];
 
   visible = false;
 
@@ -23,7 +49,7 @@ export class List {
 
   profissionalSelecionado: string = "Todos os profissionais";
 
-  consultas: ConsultaResponseModel [] = [
+  consultas: ConsultaResponseModel[] = [
     {
       paciente: 'Maria Silva',
       profissional: 'Dra. Ana Souza',
@@ -116,5 +142,14 @@ export class List {
 
   showDialog() {
     this.visible = true;
+  }
+
+  cancelar() {
+    this.visible = false;
+    this.consultaForm.reset();
+  }
+
+  salvar() {
+
   }
 }
