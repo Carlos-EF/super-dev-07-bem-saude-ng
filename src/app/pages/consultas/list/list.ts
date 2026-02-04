@@ -11,6 +11,8 @@ import { RegistroStatusConsulta } from "../../../core/components/registro-status
 import { AcoesBotaoConsultas } from "../../../core/components/acoes-botao-consultas/acoes-botao-consultas";
 import { TextareaModule } from 'primeng/textarea';
 import { AvatarModule } from 'primeng/avatar';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 
 @Component({
   selector: 'app-list',
@@ -27,6 +29,8 @@ import { AvatarModule } from 'primeng/avatar';
     ReactiveFormsModule,
     TextareaModule,
     AvatarModule,
+    InputGroupAddonModule,
+    InputGroupModule,
   ],
   templateUrl: './list.html',
 })
@@ -44,15 +48,33 @@ export class List {
 
   primeiraLetra: string = "";
 
-  profissionalOpcoes = ["Selecione"];
+  profissionalOpcoes = [
+    "Selecione",
+    "Dra. Ana Souza",
+    "Dr. Carlos Lima",
+    "Dra. Juliana Martins",
+    "Dr. Bruno Rocha",
+  ];
 
-  pacienteOpcoes = ["Selecione"];
+  profissionalSelecionado = "Selecione";
+
+  pacienteOpcoes = [
+    "Selecione",
+    "Maria Silva",
+    "João Pereira",
+    "Fernanda Costa",
+    "Rafael Almeida",
+    "Camila Santos",
+    "Diego Fernandes",
+    "Patrícia Oliveira",
+    "Lucas Ribeiro",
+    "Aline Barbosa",
+    "Gustavo Nunes",
+    "Bruna Carvalho",
+    "Eduardo Souza",
+  ];
 
   visible = false;
-
-  profissionais = ["Todos os profissionais"];
-
-  profissionalSelecionado: string = "Todos os profissionais";
 
   consultas: ConsultaResponseModel[] = [
     {
@@ -143,7 +165,7 @@ export class List {
 
   status = ["Todos os status", "Confirmada", "Agendada", "Cancelada", "Em Andamento", "Finalizada"];
 
-  statusSelecionado: string = "Todos os status";
+  statusSelecionado = "Todos os status";
 
   showDialog() {
     this.visible = true;
