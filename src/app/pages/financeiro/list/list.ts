@@ -7,6 +7,7 @@ import { TableModule } from 'primeng/table';
 import { FinanceiroResponseModel } from '../../../models/financeiro.model';
 import { RegistroStatusFinanceiro } from "../../../core/components/registro-status-financeiro/registro-status-financeiro";
 import { AcoesBotaoFinanceiro } from "../../../core/components/acoes-botao-financeiro/acoes-botao-financeiro";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-list',
@@ -17,14 +18,17 @@ import { AcoesBotaoFinanceiro } from "../../../core/components/acoes-botao-finan
     TableModule,
     DialogModule,
     RegistroStatusFinanceiro,
-    AcoesBotaoFinanceiro
-],
+    AcoesBotaoFinanceiro,
+    FormsModule
+  ],
   templateUrl: './list.html',
 })
 export class List {
   visible = false;
 
-  valorEmAberto: number = 0;
+  filtroStatus: string[] = ["Todos os status", "Paga", "Em Aberto"];
+
+  statusSelecionado: string = "Todos os status";
 
   clientesFinanceiros: FinanceiroResponseModel[] =
     [
@@ -63,9 +67,28 @@ export class List {
         "valor": 410.00,
         "status": "EM ABERTO"
       }
-    ]
+    ];
 
   showDialog() {
     this.visible = true;
+  }
+
+  calcularTotal() {
+    let valorTotal = this.clientesFinanceiros.reduce((valorTotal, cliente) => valorTotal + cliente.valor, 0);
+
+    return `R$ ${valorTotal.toFixed(2)}`;
+  }
+
+  // refatorar depois para somente pagas no mês atual
+  calcularPagas() {
+    let valorTotal = this.clientesFinanceiros.filter(cliente => cliente.status == "PAGA").reduce((valorTotal, cliente) => valorTotal + cliente.valor, 0);
+
+    return `R$ ${valorTotal.toFixed(2)}`;
+  }
+
+  calcularEmAberto() {
+    let valorTotal = this.clientesFinanceiros.filter(cliente => cliente.status == "EM ABERTO").reduce((valorTotal, cliente) => valorTotal + cliente.valor, 0);
+
+    return `R$ ${valorTotal.toFixed(2)}`;
   }
 }

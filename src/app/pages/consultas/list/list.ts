@@ -23,7 +23,6 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
     DatePickerModule,
     TableModule,
     DialogModule,
-    InputMaskDirective,
     RegistroStatusConsulta,
     AcoesBotaoConsultas,
     ReactiveFormsModule,
