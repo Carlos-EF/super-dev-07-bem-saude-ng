@@ -9,6 +9,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import {provideAuth0 } from '@auth0/auth0-angular';
 import { environment } from '../environments/environment';
 
+import {provideAuth0 } from '@auth0/auth0-angular';
+import { environment } from '../environments/environment';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
